@@ -3,6 +3,7 @@ import pickle
 import numpy as np
 import pandas as pd
 from flask_cors import CORS
+import os
 
 # Load model
 model = pickle.load(open('Random Forest High Accuracy', 'rb'))
@@ -36,4 +37,5 @@ def predict():
         return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)
